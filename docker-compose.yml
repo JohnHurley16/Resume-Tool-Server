@@ -11,7 +11,7 @@ services:
       PORT: 3000
     ports:
       - "3000:3000"
-    command: npm run dev
+    command: npm run start
     volumes:
       - .:/app/
       - /app/node_modules
@@ -21,6 +21,6 @@ services:
     ports:
       - "35432:5432"
     environment:
-      POSTGRESS_USER: user
-      POSTGRESS_PASSWORD: pass
-      POSTGRESS_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
