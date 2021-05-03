@@ -4,8 +4,7 @@ const router = Router();
 
 // Routes go here
 router.post('/create', user.createUser);
-router.get('/login', user.getUserLogin);
-router.get('/:id', user.getUser)
+router.get('/:id', user.getUser);
 router.post('/update/:id', user.updateUser);
 router.post('/delete', user.deleteUser);
 

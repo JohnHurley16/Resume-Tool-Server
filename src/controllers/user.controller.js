@@ -19,22 +19,12 @@ exports.getUser = async (req, res) => {
     return res.send(user);
 }
 
-exports.getUserLogin = async (req, res) => {
-    const { username } = req.body;
-
-    return res.send(req.body);
-}
-
 exports.createUser = async (req, res) => {
-    const { fname, lname, email, username, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!username ||
-        !password ||
-        !fname ||
-        !lname ||
-        !email) {
+    if (!username || !password) {
         return res.status(400).send({
-            message: `Please submit all required fields`
+            message: `You need to include a username and password`
         })
     }
 
@@ -44,23 +34,14 @@ exports.createUser = async (req, res) => {
         }
     })
 
-    const emailExists = await User.findOne({
-        where: {
-            email,
-        }
-    })
-
-    if (usernameExists || emailExists) {
+    if (usernameExists) {
         return res.status(400).send({
-            message: `A user with this username or email already exists`
+            message: `A user with this username already exists`
         })
     }
 
     try {
         let newUser = await User.create({
-            fname,
-            lname,
-            email,
             username,
             password
         })
@@ -73,7 +54,7 @@ exports.createUser = async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
-    const { fname, lname, email, username, password } = req.body;
+    const { username, password } = req.body;
     const { id } = req.params;
 
     const user = await User.findOne({
@@ -95,18 +76,6 @@ exports.updateUser = async (req, res) => {
 
         if (password) {
             user.password = password
-        }
-
-        if (fname) {
-            user.fname = fname
-        }
-
-        if (lname) {
-            user.lname = lname
-        }
-
-        if (email) {
-            user.email = email
         }
         user.save();
 
