@@ -7,6 +7,15 @@ const user = (sequelize, DataTypes) => {
                 primaryKey: true,
                 autoIncrement: true,
             },
+            fname: {
+                type: DataTypes.STRING
+            },
+            lname: {
+                type: DataTypes.STRING
+            },
+            email: {
+                type: DataTypes.STRING
+            },
             username: {
                 type: DataTypes.STRING,
                 unique: true
